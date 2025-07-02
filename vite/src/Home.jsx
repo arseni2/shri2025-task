@@ -1,4 +1,5 @@
-import React from 'react';
+import Event from "./Event"
+import {useEffect, useRef, useState} from "react";
 
 const TABS = {
     all: {
@@ -113,12 +114,12 @@ for (let i = 0; i < 6; ++i) {
 
 const TABS_KEYS = Object.keys(TABS);
 const Home = () => {
-    const ref = React.useRef();
-    const initedRef = React.useRef(false);
-    const [activeTab, setActiveTab] = React.useState('');
-    const [hasRightScroll, setHasRightScroll] = React.useState(false);
+    const ref = useRef();
+    const initedRef = useRef(false);
+    const [activeTab, setActiveTab] = useState('');
+    const [hasRightScroll, setHasRightScroll] = useState(false);
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (!activeTab && !initedRef.current) {
             initedRef.current = true;
             setActiveTab(new URLSearchParams(location.search).get('tab') || 'all');
@@ -134,7 +135,7 @@ const Home = () => {
         sizes = [...sizes, size];
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         const sumWidth = sizes.reduce((acc, item) => acc + item.width, 0);
         const sumHeight = sizes.reduce((acc, item) => acc + item.height, 0);
 
