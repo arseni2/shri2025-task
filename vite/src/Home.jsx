@@ -1,21 +1,39 @@
-import { useRef, useEffect, useState } from "react";
+import {useRef, useEffect, useState, useMemo} from "react";
+import IconTemperature from './assets/icon_temperature.svg'
+import IconTemperature2 from './assets/icon_temperature_2.svg'
+import IconSun from './assets/icon_sun.svg'
+import IconSun2 from './assets/icon_sun_2.svg'
+import IconScheduled from './assets/icon_scheduled.svg'
 
 const Event = function Event(props) {
+    const icon = useMemo(() => {
+        switch (props.icon) {
+            case 'temp':
+                return IconTemperature;
+            case 'temp2':
+                return IconTemperature2;
+            case 'light':
+                return IconSun;
+            case 'light2':
+                return IconSun2;
+            case 'schedule':
+                return IconScheduled;
+        }
+        return ''
+    }, [])
     return (
-        <li className={"event" + (props.slim ? " event_slim" : "")}>
+        <li className={'event' + (props.slim ? ' event_slim' : '')}>
             <button className="event__button">
-        <span
-            className={`event__icon event__icon_${props.icon}`}
-            role="img"
-            aria-label={props.iconLabel}
-        ></span>
+                <img className={`event__icon event__icon_${props.icon}`} alt={props.iconLabel} src={icon}
+                     loading="lazy"/>
                 <h4 className="event__title">{props.title}</h4>
-                {props.subtitle && (
+                {props.subtitle &&
                     <span className="event__subtitle">{props.subtitle}</span>
-                )}
+                }
             </button>
         </li>
-    );
+)
+
 }
 
 const TABS = {
