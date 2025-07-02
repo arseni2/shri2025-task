@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState, memo } from "react";
 
 
-const Event = function Event(props) {
+const Event = memo(function Event(props) {
     return (
         <li className={"event" + (props.slim ? " event_slim" : "")}>
             <button className="event__button">
@@ -17,7 +17,7 @@ const Event = function Event(props) {
             </button>
         </li>
     );
-}
+})
 
 const TABS = {
     all: {
